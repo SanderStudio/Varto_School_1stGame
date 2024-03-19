@@ -22,7 +22,7 @@ namespace Varto_School_1stGame
         {
 
             bool ready = true;
-            string playerName;
+            string playerName = null;
             string startAnswer;
             string oneMoreTimeAnswer;
             int age = 0;
@@ -51,7 +51,7 @@ namespace Varto_School_1stGame
                         }
                         else if (startAnswer == "yes")
                         {
-                            Playing();
+                            Playing(ref rounds, ref wins);
                         }
                         else
                         {
@@ -74,7 +74,9 @@ namespace Varto_School_1stGame
                 }
                 else if (oneMoreTimeAnswer == "yes")
                 {
-                    Playing();
+                    oneMoreTimeAnswer= null;
+                    Console.WriteLine($"Hello {playerName}, your age: {age}, rounds played: {rounds}, total wins: {wins}");
+                    Playing(ref rounds, ref wins);
                 }
                 else
                 {
@@ -83,7 +85,7 @@ namespace Varto_School_1stGame
                 }
             }
 
-            static void Playing()
+            static void Playing(ref int rounds, ref int wins)
             {
                 Random random = new Random();
                 int playerWeapon;
@@ -122,12 +124,15 @@ namespace Varto_School_1stGame
                     {
                         case 0:
                             Console.WriteLine("Congratulations! You emerge victorious!");
+                            wins++;
                             break;
                         case 1:
                             Console.WriteLine("You've conquered the game! Well done!");
+                            wins++;
                             break;
                         case 2:
                             Console.WriteLine("Victory is yours! Celebrate your triumph!");
+                            wins++;
                             break;
                     }
                 }
@@ -150,6 +155,7 @@ namespace Varto_School_1stGame
                             break;
                     }
                 }
+                rounds += 3;
             }
 
         }
