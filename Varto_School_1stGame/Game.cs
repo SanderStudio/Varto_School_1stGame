@@ -81,87 +81,95 @@ namespace Varto_School_1stGame
                         Weapons randomPickedWeapon = (Weapons)randomWeapon;
                         Console.WriteLine($"Opponent picked {randomPickedWeapon}");
 
-                        GameResult(pickedWeapon, randomPickedWeapon);
+                        int roundResult = GameResult(pickedWeapon, randomPickedWeapon);
+                        if (roundResult == 1)
+                        {
+                            playerScore++;
+                        }
+                        else if (roundResult == -1)
+                        {
+                            aiScore++;
+                        }
                     }
 
                     if (playerScore > aiScore)
                     {
-
+                        Console.WriteLine("You win the game!");
                     }
                     else if (playerScore == aiScore)
                     {
-
+                        Console.WriteLine("It's a tie!");
                     }
                     else
                     {
-
+                        Console.WriteLine("You lose the game!");
                     }
                 }
             }
 
-            static void GameResult(Weapons player, Weapons random)
+            static int GameResult(Weapons player, Weapons random)
             {
-                int a = (int)player;
-                int b = (int)random;
+                int playerScore = 0;
+                int aiScore = 0;
 
-                switch (a)
+                switch (player)
                 {
-                    case 1:
+                    case Weapons.Rock:
                         {
-                            if (a == b)
+                            if (random == Weapons.Rock)
                             {
                                 Console.WriteLine($"Draw");
                             }
-                            else if(b == 2)
+                            else if (random == Weapons.Scissors)
                             {
                                 Console.WriteLine("You win!");
-
+                                return 1;
                             }
-                            else if (b == 3)
+                            else if (random == Weapons.Paper)
                             {
                                 Console.WriteLine("You lose");
-
+                                return -1;
                             }
                             break;
                         }
-                    case 2:
+                    case Weapons.Scissors:
                         {
-                            if (a == b)
+                            if (random == Weapons.Scissors)
                             {
                                 Console.WriteLine($"Draw");
                             }
-                            else if (b == 1)
+                            else if (random == Weapons.Rock)
                             {
                                 Console.WriteLine("You lose");
-
+                                return -1;
                             }
-                            else if (b == 3)
+                            else if (random == Weapons.Paper)
                             {
                                 Console.WriteLine("You win");
-
+                                return 1;
                             }
                             break;
                         }
-                    case 3:
+                    case Weapons.Paper:
                         {
-                            if (a == b)
+                            if (random == Weapons.Paper)
                             {
                                 Console.WriteLine($"Draw");
                             }
-                            else if (b == 1)
+                            else if (random == Weapons.Rock)
                             {
                                 Console.WriteLine("You win!");
-
+                                return 1;
                             }
-                            else if (b == 2)
+                            else if (random == Weapons.Scissors)
                             {
                                 Console.WriteLine("You lose");
-
+                                return -1;
                             }
                             break;
                         }
                 }
-
+                return 0;
             }
         }
     }
