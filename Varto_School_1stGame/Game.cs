@@ -10,6 +10,8 @@ namespace Varto_School_1stGame
     class Game
     {
 
+         
+
         enum Weapons
         {
             Rock = 1,
@@ -18,11 +20,14 @@ namespace Varto_School_1stGame
         }
         static void Main(string[] args)
         {
+
             bool ready = true;
             string playerName;
             string startAnswer;
-            int age;
-
+            string oneMoreTimeAnswer;
+            int age = 0;
+            int wins = 0;
+            int rounds = 0;
             while (ready)
             {
                 Console.WriteLine($"Welcome to CHU-WA-CHI Game! It's 12+ rated game, so please enter your age:");
@@ -35,28 +40,46 @@ namespace Varto_School_1stGame
                         Console.WriteLine($"Please enter your name:");
                         playerName = Console.ReadLine();
 
-                        Console.WriteLine($"Hello {playerName}, your age: {age}, round played: 0, today wins: 0");
+                        Console.WriteLine($"Hello {playerName}, your age: {age}, round played: {rounds}, today wins: {wins}");
                         Console.WriteLine($"Are you ready to play? yes/no");
                         startAnswer = Console.ReadLine();
 
-                            if (startAnswer == "no")
-                            {
-                                Console.WriteLine($"Have a nice day!");
-                                Environment.Exit(0);
-                            }
-                            else if (startAnswer == "yes")
-                            {
+                        if (startAnswer == "no")
+                        {
+                            Console.WriteLine($"Have a nice day!");
+                            Environment.Exit(0);
+                        }
+                        else if (startAnswer == "yes")
+                        {
                             Playing();
-                            }
-                            else
-                            {
-                                Console.WriteLine($"Wrong answer");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Wrong answer");
                             startAnswer = null;
-                            }
+                        }
 
                     }
                     else
                         Console.WriteLine($"You are too young");
+                }
+
+                Console.WriteLine($"One more time? yes/no");
+                oneMoreTimeAnswer = Console.ReadLine();
+
+                if (oneMoreTimeAnswer == "no")
+                {
+                    Console.WriteLine($"Have a nice day!");
+                    Environment.Exit(0);
+                }
+                else if (oneMoreTimeAnswer == "yes")
+                {
+                    Playing();
+                }
+                else
+                {
+                    Console.WriteLine($"Wrong answer");
+                    startAnswer = null;
                 }
             }
 
@@ -66,6 +89,7 @@ namespace Varto_School_1stGame
                 int playerWeapon;
                 int playerScore = 0;
                 int aiScore = 0;
+                int randomPhrase = random.Next(3);
 
                 for (int i = 0; i < 3; i++)
                 {
@@ -94,7 +118,18 @@ namespace Varto_School_1stGame
                 }
                 if (playerScore > aiScore)
                 {
-                    Console.WriteLine("You win the game!");
+                    switch (randomPhrase)
+                    {
+                        case 0:
+                            Console.WriteLine("Congratulations! You emerge victorious!");
+                            break;
+                        case 1:
+                            Console.WriteLine("You've conquered the game! Well done!");
+                            break;
+                        case 2:
+                            Console.WriteLine("Victory is yours! Celebrate your triumph!");
+                            break;
+                    }
                 }
                 else if (playerScore == aiScore)
                 {
@@ -102,74 +137,87 @@ namespace Varto_School_1stGame
                 }
                 else
                 {
-                    Console.WriteLine("You lose the game!");
+                    switch (randomPhrase)
+                    {
+                        case 0:
+                            Console.WriteLine("Better luck next time! You were narrowly defeated.");
+                            break;
+                        case 1:
+                            Console.WriteLine("Alas, you've been bested this time. Keep striving!");
+                            break;
+                        case 2:
+                            Console.WriteLine("Defeat is bitter, but it's a chance to learn and grow.");
+                            break;
+                    }
                 }
             }
 
-            static int GameResult(Weapons player, Weapons random)
+        }
+
+
+        static int GameResult(Weapons player, Weapons random)
+        {
+            int playerScore = 0;
+            int aiScore = 0;
+
+            switch (player)
             {
-                int playerScore = 0;
-                int aiScore = 0;
-
-                switch (player)
-                {
-                    case Weapons.Rock:
+                case Weapons.Rock:
+                    {
+                        if (random == Weapons.Rock)
                         {
-                            if (random == Weapons.Rock)
-                            {
-                                Console.WriteLine($"Draw");
-                            }
-                            else if (random == Weapons.Scissors)
-                            {
-                                Console.WriteLine("You win!");
-                                return 1;
-                            }
-                            else if (random == Weapons.Paper)
-                            {
-                                Console.WriteLine("You lose");
-                                return -1;
-                            }
-                            break;
+                            Console.WriteLine($"Draw");
                         }
-                    case Weapons.Scissors:
+                        else if (random == Weapons.Scissors)
                         {
-                            if (random == Weapons.Scissors)
-                            {
-                                Console.WriteLine($"Draw");
-                            }
-                            else if (random == Weapons.Rock)
-                            {
-                                Console.WriteLine("You lose");
-                                return -1;
-                            }
-                            else if (random == Weapons.Paper)
-                            {
-                                Console.WriteLine("You win");
-                                return 1;
-                            }
-                            break;
+                            Console.WriteLine("You win!");
+                            return 1;
                         }
-                    case Weapons.Paper:
+                        else if (random == Weapons.Paper)
                         {
-                            if (random == Weapons.Paper)
-                            {
-                                Console.WriteLine($"Draw");
-                            }
-                            else if (random == Weapons.Rock)
-                            {
-                                Console.WriteLine("You win!");
-                                return 1;
-                            }
-                            else if (random == Weapons.Scissors)
-                            {
-                                Console.WriteLine("You lose");
-                                return -1;
-                            }
-                            break;
+                            Console.WriteLine("You lose");
+                            return -1;
                         }
-                }
-                return 0;
+                        break;
+                    }
+                case Weapons.Scissors:
+                    {
+                        if (random == Weapons.Scissors)
+                        {
+                            Console.WriteLine($"Draw");
+                        }
+                        else if (random == Weapons.Rock)
+                        {
+                            Console.WriteLine("You lose");
+                            return -1;
+                        }
+                        else if (random == Weapons.Paper)
+                        {
+                            Console.WriteLine("You win");
+                            return 1;
+                        }
+                        break;
+                    }
+                case Weapons.Paper:
+                    {
+                        if (random == Weapons.Paper)
+                        {
+                            Console.WriteLine($"Draw");
+                        }
+                        else if (random == Weapons.Rock)
+                        {
+                            Console.WriteLine("You win!");
+                            return 1;
+                        }
+                        else if (random == Weapons.Scissors)
+                        {
+                            Console.WriteLine("You lose");
+                            return -1;
+                        }
+                        break;
+                    }
             }
+            return 0;
         }
     }
 }
