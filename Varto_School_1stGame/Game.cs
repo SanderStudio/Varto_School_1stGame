@@ -91,19 +91,18 @@ namespace Varto_School_1stGame
                             aiScore++;
                         }
                     }
-
-                    if (playerScore > aiScore)
-                    {
-                        Console.WriteLine("You win the game!");
-                    }
-                    else if (playerScore == aiScore)
-                    {
-                        Console.WriteLine("It's a tie!");
-                    }
-                    else
-                    {
-                        Console.WriteLine("You lose the game!");
-                    }
+                }
+                if (playerScore > aiScore)
+                {
+                    Console.WriteLine("You win the game!");
+                }
+                else if (playerScore == aiScore)
+                {
+                    Console.WriteLine("It's a tie!");
+                }
+                else
+                {
+                    Console.WriteLine("You lose the game!");
                 }
             }
 
