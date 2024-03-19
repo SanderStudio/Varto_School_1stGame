@@ -9,9 +9,6 @@ namespace Varto_School_1stGame
 {
     class Game
     {
-
-         
-
         enum Weapons
         {
             Rock = 1,
@@ -28,6 +25,7 @@ namespace Varto_School_1stGame
             int age = 0;
             int wins = 0;
             int rounds = 0;
+
             while (ready)
             {
                 Console.WriteLine($"Welcome to CHU-WA-CHI Game! It's 12+ rated game, so please enter your age:");
@@ -39,50 +37,53 @@ namespace Varto_School_1stGame
                     {
                         Console.WriteLine($"Please enter your name:");
                         playerName = Console.ReadLine();
+                            Console.WriteLine($"Hello {playerName}, your age: {age}, round played: {rounds}, today wins: {wins}");
+                            Console.WriteLine($"Are you ready to play? yes/no");
+                            startAnswer = Console.ReadLine();
 
-                        Console.WriteLine($"Hello {playerName}, your age: {age}, round played: {rounds}, today wins: {wins}");
-                        Console.WriteLine($"Are you ready to play? yes/no");
-                        startAnswer = Console.ReadLine();
+                            if (startAnswer == "no")
+                            {
+                                Console.WriteLine($"Have a nice day!");
+                                Environment.Exit(0);
+                            }
+                            else if (startAnswer == "yes")
+                            {
+                                Playing(ref rounds, ref wins);
+                            }
+                            else
+                            {
+                                Console.WriteLine($"Wrong answer");
+                                startAnswer = null;
+                            }
 
-                        if (startAnswer == "no")
+                        while (true)
                         {
-                            Console.WriteLine($"Have a nice day!");
-                            Environment.Exit(0);
-                        }
-                        else if (startAnswer == "yes")
-                        {
-                            Playing(ref rounds, ref wins);
-                        }
-                        else
-                        {
-                            Console.WriteLine($"Wrong answer");
-                            startAnswer = null;
-                        }
+                            Console.WriteLine($"One more time? yes/no");
+                            oneMoreTimeAnswer = Console.ReadLine();
 
+                            if (oneMoreTimeAnswer == "no")
+                            {
+                                Console.WriteLine($"Have a nice day!");
+                                Environment.Exit(0);
+                            }
+                            else if (oneMoreTimeAnswer == "yes")
+                            {
+                                oneMoreTimeAnswer = null;
+                                Console.WriteLine($"Hello {playerName}, your age: {age}, rounds played: {rounds}, total wins: {wins}");
+                                Playing(ref rounds, ref wins);
+                            }
+                            else
+                            {
+                                Console.WriteLine($"Wrong answer");
+                                startAnswer = null;
+                            }
+                        }
                     }
                     else
                         Console.WriteLine($"You are too young");
                 }
 
-                Console.WriteLine($"One more time? yes/no");
-                oneMoreTimeAnswer = Console.ReadLine();
-
-                if (oneMoreTimeAnswer == "no")
-                {
-                    Console.WriteLine($"Have a nice day!");
-                    Environment.Exit(0);
-                }
-                else if (oneMoreTimeAnswer == "yes")
-                {
-                    oneMoreTimeAnswer= null;
-                    Console.WriteLine($"Hello {playerName}, your age: {age}, rounds played: {rounds}, total wins: {wins}");
-                    Playing(ref rounds, ref wins);
-                }
-                else
-                {
-                    Console.WriteLine($"Wrong answer");
-                    startAnswer = null;
-                }
+               
             }
 
             static void Playing(ref int rounds, ref int wins)
