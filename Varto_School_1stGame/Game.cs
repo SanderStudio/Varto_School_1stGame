@@ -28,7 +28,10 @@ namespace Varto_School_1stGame
 
             while (ready)
             {
-                Console.WriteLine($"Welcome to CHU-WA-CHI Game! It's 12+ rated game, so please enter your age:");
+                Console.WriteLine($"---------------------------------------------");
+                Console.WriteLine($"     Welcome to CHU-WA-CHI Game!       ");
+                Console.WriteLine($"---------------------------------------------");
+                Console.WriteLine($"  It's a 12+ rated game, so please enter your age:");
                 if (!int.TryParse(Console.ReadLine(), out age))
                     Console.WriteLine($"Wrong age");
                 else
@@ -58,7 +61,9 @@ namespace Varto_School_1stGame
 
                         while (true)
                         {
-                            Console.WriteLine($"One more time? yes/no");
+                            Console.WriteLine($"---------------------------------------------");
+                            Console.WriteLine($"\tOne more time? yes/no");
+                            Console.WriteLine($"---------------------------------------------");
                             oneMoreTimeAnswer = Console.ReadLine();
 
                             if (oneMoreTimeAnswer == "no")
@@ -227,4 +232,5 @@ namespace Varto_School_1stGame
             return 0;
         }
     }
+
 }
